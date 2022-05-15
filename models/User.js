@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); 
 // Mongoose model is a wrapper on the Mongoose schema.
 // Mongoose schema defines the strucutre of the document, default values, validators,etc.
 // Whereas a mongoose model provides an interface to the database for creating, querying,updating,
