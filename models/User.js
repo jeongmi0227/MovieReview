@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        maxlength:50
+        minlength:5
     },
     role: {
         type: Number,
@@ -58,8 +58,9 @@ userSchema.pre('save', function (next) {
 
 userSchema.methods.comparePassword = function (unencryptedPw, callback) {
     bcrypt.compare(unencryptedPw, this.password, function (err, isEqual) {
-        if (err) return callback(err),
-            callback(null,isEqual)
+        if (err) return callback(err);
+        callback(null, isEqual);    
+        
     })
 }
 userSchema.methods.createToken = function (callback) {
@@ -68,8 +69,8 @@ userSchema.methods.createToken = function (callback) {
     var token = jwt.sign(user._id.toHexString(), 'secretToken');
     user.token = token;
     user.save(function (err, user) {
-        if (err) return callback(err)
-        callback(user)
+        if (err) return callback(err) 
+        callback(null,user)    
     })
     
 }

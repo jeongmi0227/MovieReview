@@ -35,6 +35,7 @@ app.post('/register', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
+    
     // 1. Check email data whether it is stored in database
     User.findOne({ email: req.body.email }, (err, user) => {
         if (!user) {
@@ -51,19 +52,16 @@ app.post('/login', (req, res) => {
             // 3. if password matches then create token for user        
             user.createToken((err, user) => {
                 if (err) return res.status(400).send(err);
-
                 // Save token (cookie, local storage)
                 res.cookie("x_auth", user.token)
                     .status(200)
                     .json({ loginSuccess: true, userId: user._id });
-
             })
         })
     })
-    
-    
-
 });
+
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
