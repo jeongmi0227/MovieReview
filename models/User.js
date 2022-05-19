@@ -74,5 +74,18 @@ userSchema.methods.createToken = function (callback) {
     })
     
 }
+
+userSchema.statics.findByToken = function (token, callback) {
+    var user = this;
+    // decode token
+    jwt.verify(token, 'secretToken', function (err, decoded) {
+        // use decoded user_id to verify the user id (from db)
+        // then check whether the token from the cookie match the token from DB
+        user.findOne({ "_id": decoded, "token": token }, function (err, user) {
+            if (err) return callback(err)
+            callback(null, user);
+        })
+    })
+}
 const User = mongoose.model('User', userSchema);
 module.exports = { User };
