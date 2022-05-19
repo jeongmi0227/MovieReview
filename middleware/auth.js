@@ -5,6 +5,8 @@ const { User } = require("../models/User");
     // 1. Get token from client side cookie
     let token = req.cookies.x_auth;
     // 2. Decrypt token and check user id
+    // 3. if database has the decrypted user id then authentication success.
+    // 4. Fail to authenticate
         User.findByToken(token, (err, user) => {
             if (err) throw err;
             if (!user) return res.json({ isAuth: false, error: true })
@@ -12,8 +14,7 @@ const { User } = require("../models/User");
             req.user = user;
             next();
     })
-    // 3. if database has the decrypted user id then authentication success.
-    // 4. Fail to authenticate
+   
 }
 
 module.exports = { auth };
