@@ -1,2 +1,2 @@
 # MovieReview
-An SPA website with React and Redux. This service provide lastest movie and allows users to write reivews and discuss about the moview.
+A SPA website with React and Redux. This service provides the latest movie information and allows users to write reviews and discuss the movie. 
