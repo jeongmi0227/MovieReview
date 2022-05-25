@@ -5,6 +5,7 @@ import { API_URL, API_KEY,IMAGE_BASE_URL } from '../../../Config';
 import MainImage from './Sections/MainImage';
 import GridCard from '../commons/GridCard';
 import { Row } from 'antd';
+import NavBar from '../NavBar/NavBar';
 
 export default function LandingPage() {
     const navigate = useNavigate();
@@ -44,6 +45,7 @@ export default function LandingPage() {
 
   return (
       <div style={{ width: '100%', margin: '0' }}> 
+          <NavBar/>
           {/* Main Image*/}
             {MainMovieImage&&
                 <MainImage
